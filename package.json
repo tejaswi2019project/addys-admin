@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/tejaswi2019project/addys-admin/issues"
   },
-  "homepage": "https://github.com/tejaswi2019project/addys-admin#readme"
+  "homepage": "https://github.com/tejaswi2019project/addys-admin#readme",
+  "dependencies": {
+    "graphql-yoga": "^1.17.4"
+  }
 }
