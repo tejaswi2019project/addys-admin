@@ -367,6 +367,11 @@ class ManageProductsBox extends Component {
                   <b>Category</b>
                 </label>
               </div>
+              <div className="manage-product-item-price">
+                <label>
+                  <b>Price</b>
+                </label>
+              </div>
               <div className="manage-product-item-quantity">
                 <label>
                   <b>Quantity</b>
@@ -385,6 +390,9 @@ class ManageProductsBox extends Component {
                   </div>
                   <div className="manage-product-item-category">
                     <label>{product.categoryPath}</label>
+                  </div>
+                  <div className="manage-product-item-price">
+                    <label>${product.price}</label>
                   </div>
                   <div className="manage-product-item-quantity">
                     <label>{product.quantity}</label>

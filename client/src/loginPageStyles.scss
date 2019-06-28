@@ -316,19 +316,22 @@ $inventory_width: 60em;
   flex-direction: row;
   padding-left: 20px;
   padding-top: 5px;
-  width: 80%;
+  width: 85%;
 }
 .manage-product-item-title {
-  width: 40%;
+  width: 35%;
 }
 .manage-product-item-category {
-  width: 40%;
+  width: 35%;
+}
+.manage-product-item-price {
+  width: 15%;
 }
 .manage-product-item-quantity {
-  width: 20%;
+  width: 15%;
 }
 .manage-product-item-right {
-  width: 20%;
+  width: 15%;
 }
 .manage-product-edit-btn,
 .manage-product-filter-btn {
