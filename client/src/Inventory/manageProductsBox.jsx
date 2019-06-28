@@ -79,6 +79,7 @@ class ManageProductsBox extends Component {
       showErrorMessage: false
     };
     this.onCategoryFilterChange = this.onCategoryFilterChange.bind(this);
+    this.onSortFilterChange = this.onSortFilterChange.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
   }
 
@@ -199,6 +200,11 @@ class ManageProductsBox extends Component {
   };
 
   onCategoryFilterChange(e) {
+    this.setState({
+      categoryIdFilter: e.target.options[e.target.selectedIndex].value
+    });
+  }
+  onSortFilterChange(e) {
     const sortVal = e.target.options[e.target.selectedIndex].value;
     switch (sortVal) {
       case "titleAscending":
@@ -297,7 +303,10 @@ class ManageProductsBox extends Component {
             <label>
               <b>Category</b>
             </label>
-            <select className="manage-product-filter-item">
+            <select
+              className="manage-product-filter-item"
+              onChange={this.onCategoryFilterChange}
+            >
               <option value="">All Categories</option>
               {getCategories.map(cat => (
                 <option value={cat.categoryId} key={cat.categoryId}>
@@ -310,7 +319,7 @@ class ManageProductsBox extends Component {
             </label>
             <select
               className="manage-product-filter-item"
-              onChange={this.onCategoryFilterChange}
+              onChange={this.onSortFilterChange}
             >
               <option value="">None</option>
               <option value="titleAscending">Title - Ascending</option>
