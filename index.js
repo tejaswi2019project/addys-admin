@@ -212,13 +212,13 @@ const options = { port: process.env.PORT || 4000, endpoint: "/graphql" };
 const server = new GraphQLServer({ typeDefs, resolvers });
 const app = server.express;
 
-// if (process.env.NODE_ENV === "production") {
-app.use(express.static("client/build"));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-});
-// }
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+  });
+}
 
 mongoose.connection.once("open", function() {
   server.start(options, () =>

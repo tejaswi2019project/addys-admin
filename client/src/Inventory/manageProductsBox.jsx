@@ -294,7 +294,9 @@ class ManageProductsBox extends Component {
         <div className="header">Manage Products</div>
         <div className="manage-product-filters">
           <div className="manage-product-filter-item-outer">
-            <label>Category</label>
+            <label>
+              <b>Category</b>
+            </label>
             <select className="manage-product-filter-item">
               <option value="">All Categories</option>
               {getCategories.map(cat => (
@@ -303,7 +305,9 @@ class ManageProductsBox extends Component {
                 </option>
               ))}
             </select>
-            <label>Sort By</label>
+            <label>
+              <b>Sort By</b>
+            </label>
             <select
               className="manage-product-filter-item"
               onChange={this.onCategoryFilterChange}
@@ -317,7 +321,7 @@ class ManageProductsBox extends Component {
               <option value="quantityDescending">Quantity - Descending</option>
             </select>
             <button
-              className="login-btn manage-product-filter-item"
+              className="manage-product-filter-btn"
               onClick={this.getProducts}
             >
               Get Products
@@ -366,7 +370,7 @@ class ManageProductsBox extends Component {
                     className="manage-product-edit-btn"
                     onClick={() => this.showElement(product)}
                   >
-                    edit
+                    Edit
                   </button>
                 </div>
               </div>
@@ -385,11 +389,11 @@ class ManageProductsBox extends Component {
                   </div>
                   <div className="inventory-input-group">
                     <label>Details</label>
-                    <input
+                    <textarea
                       id={product.productId + "-detailsInput"}
                       type="text"
                       name="details"
-                      className="inventory-input"
+                      className="inventory-input-textarea"
                       placeholder="Details"
                       onChange={this.onInputChange}
                     />
@@ -420,7 +424,7 @@ class ManageProductsBox extends Component {
                       id={product.productId + "-imageURLsInput"}
                       type="text"
                       name="imageURLs"
-                      className="inventory-input-urls"
+                      className="inventory-input-textarea"
                       placeholder="Comma delimited: www.example.com,www.example2.com,www.example.com,www.example2.com"
                       onChange={this.onInputChange}
                     />
@@ -443,7 +447,7 @@ class ManageProductsBox extends Component {
                   </small>
                   <button
                     type="button"
-                    className="login-btn"
+                    className="manage-product-edit-btn"
                     onClick={this.handleSaveProduct}
                   >
                     Save Changes

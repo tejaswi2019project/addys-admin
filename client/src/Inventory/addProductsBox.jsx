@@ -204,11 +204,11 @@ class AddProductsBox extends Component {
           </div>
           <div className="inventory-input-group">
             <label>Details</label>
-            <input
+            <textarea
               id="detailsInput"
               type="text"
               name="details"
-              className="inventory-input"
+              className="inventory-input-textarea"
               placeholder="Details"
               onChange={this.onInputChange}
             />
@@ -239,7 +239,7 @@ class AddProductsBox extends Component {
               id="imageURLsInput"
               type="text"
               name="imageURLs"
-              className="inventory-input-urls"
+              className="inventory-input-textarea"
               placeholder="Comma delimited: www.example.com,www.example2.com,www.example.com,www.example2.com"
               onChange={this.onInputChange}
             />
