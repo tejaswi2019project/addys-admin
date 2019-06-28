@@ -13,10 +13,19 @@ $inventory_width: 60em;
   width: 100%;
   height: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: -50px;
+}
+.inventory-root-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
   // justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .login-outer-div {

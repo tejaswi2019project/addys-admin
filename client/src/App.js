@@ -41,17 +41,21 @@ class App extends Component {
 
   render() {
     return (
-      <div className="root-container">
+      <React.Fragment>
         {this.state.isLoginPageVisible && (
-          <LoginRenderer loginSuccess={this.loginSuccess} />
+          <div className="root-container">
+            <LoginRenderer loginSuccess={this.loginSuccess} />
+          </div>
         )}
-        {this.state.isManageInventoryVisible && (
-          <InventoryRenderer
-            signoutSuccess={this.signoutSuccess}
-            username={this.state.activeUsername}
-          />
-        )}
-      </div>
+        <div className="inventory-root-container">
+          {this.state.isManageInventoryVisible && (
+            <InventoryRenderer
+              signoutSuccess={this.signoutSuccess}
+              username={this.state.activeUsername}
+            />
+          )}
+        </div>
+      </React.Fragment>
     );
   }
 }
