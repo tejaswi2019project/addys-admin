@@ -16,7 +16,8 @@ const Product = mongoose.model("Product", {
   categoryName: String,
   categoryPath: String,
   imageURLs: [String],
-  quantity: { type: Number, min: 0 }
+  quantity: { type: Number, min: -1 },
+  price: { type: Number, min: 0 }
 });
 
 const User = mongoose.model("User", {
@@ -48,8 +49,9 @@ const typeDefs = `
     categoryName: String!
     categoryPath: String!
     imageURLs: [String!]!
-    quantity: Int
+    quantity: Int!
     id: ID!
+    price: Float
   }
   type User {
     username: String!
@@ -63,8 +65,8 @@ const typeDefs = `
     categoryPath: String!
   }
   type Mutation {
-      createProduct(title: String!, details: String!, categoryId: String!, categoryName: String!, categoryPath: String!, quantity: Int!, imageURLs: [String!]!): Product
-      updateProduct(productId: String!, title: String!, details: String!, categoryId: String!, categoryName: String!, categoryPath: String!, quantity: Int!, imageURLs: [String!]!): Boolean
+      createProduct(title: String!, details: String!, categoryId: String!, categoryName: String!, categoryPath: String!, quantity: Int!, imageURLs: [String!]!, price: Float): Product
+      updateProduct(productId: String!, title: String!, details: String!, categoryId: String!, categoryName: String!, categoryPath: String!, quantity: Int!, imageURLs: [String!]!, price: Float): Boolean
       removeProduct(productId: String!): Boolean
       getFilteredProducts(categoryId: String!, sortField: String!, sortDirection: Int!): [Product]
       createUser(username: String!, password: String!, email: String!, approved: Boolean!): User
@@ -95,7 +97,8 @@ const resolvers = {
         categoryName,
         categoryPath,
         quantity,
-        imageURLs
+        imageURLs,
+        price
       }
     ) => {
       const newId = uuidv1();
@@ -107,7 +110,8 @@ const resolvers = {
         categoryName: categoryName,
         categoryPath: categoryPath,
         quantity: quantity,
-        imageURLs: imageURLs
+        imageURLs: imageURLs,
+        price: price
       });
       await product.save();
       return product;
@@ -122,7 +126,8 @@ const resolvers = {
         categoryName,
         categoryPath,
         quantity,
-        imageURLs
+        imageURLs,
+        price
       }
     ) => {
       await Product.findOneAndUpdate(
@@ -134,7 +139,8 @@ const resolvers = {
           categoryName: categoryName,
           categoryPath: categoryPath,
           quantity: quantity,
-          imageURLs: imageURLs
+          imageURLs: imageURLs,
+          price: price
         }
       );
       return true;

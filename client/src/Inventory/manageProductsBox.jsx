@@ -21,6 +21,7 @@ const UpdateProduct = gql`
     $categoryPath: String!
     $quantity: Int!
     $imageURLs: [String!]!
+    $price: Float!
   ) {
     updateProduct(
       productId: $productId
@@ -31,6 +32,7 @@ const UpdateProduct = gql`
       categoryPath: $categoryPath
       quantity: $quantity
       imageURLs: $imageURLs
+      price: $price
     )
   }
 `;
@@ -54,6 +56,7 @@ const GetFilteredProducts = gql`
       categoryPath
       imageURLs
       quantity
+      price
     }
   }
 `;
@@ -75,6 +78,7 @@ class ManageProductsBox extends Component {
       categoryName: "",
       categoryPath: "",
       imageURLs: [],
+      price: 0,
       quantity: 0,
       showErrorMessage: false
     };
@@ -90,8 +94,9 @@ class ManageProductsBox extends Component {
       this.state.categoryId !== "" &&
       this.state.categoryName !== "" &&
       this.state.categoryPath !== "" &&
+      this.state.price > 0 &&
       this.state.imageURLs.length > 0 &&
-      this.state.quantity > 0
+      this.state.quantity > -2
     ) {
       this.setState({ showErrorMessage: false });
     } else {
@@ -105,6 +110,16 @@ class ManageProductsBox extends Component {
         {
           showAddProductSuccessMessage: false,
           quantity: parseInt(e.target.value)
+        },
+        function() {
+          this.validateErrorMessage();
+        }
+      );
+    } else if (e.target.name === "price") {
+      this.setState(
+        {
+          showAddProductSuccessMessage: false,
+          price: parseFloat(e.target.value)
         },
         function() {
           this.validateErrorMessage();
@@ -177,7 +192,8 @@ class ManageProductsBox extends Component {
       categoryName,
       categoryPath,
       imageURLs,
-      quantity
+      quantity,
+      price
     } = this.state;
     console.log(this.state);
     const res = await this.props.UpdateProduct({
@@ -189,7 +205,8 @@ class ManageProductsBox extends Component {
         categoryName: categoryName,
         categoryPath: categoryPath,
         quantity: quantity,
-        imageURLs: imageURLs
+        imageURLs: imageURLs,
+        price: price
       }
     });
     console.log(res);
@@ -435,6 +452,17 @@ class ManageProductsBox extends Component {
                       name="imageURLs"
                       className="inventory-input-textarea"
                       placeholder="Comma delimited: www.example.com,www.example2.com,www.example.com,www.example2.com"
+                      onChange={this.onInputChange}
+                    />
+                  </div>
+                  <div className="inventory-input-group">
+                    <label>Price</label>
+                    <input
+                      id={product.productId + "-priceInput"}
+                      type="text"
+                      name="price"
+                      className="inventory-input"
+                      placeholder="Price"
                       onChange={this.onInputChange}
                     />
                   </div>

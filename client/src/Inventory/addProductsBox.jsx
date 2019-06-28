@@ -20,6 +20,7 @@ const CreateProduct = gql`
     $categoryPath: String!
     $quantity: Int!
     $imageURLs: [String!]!
+    $price: Float!
   ) {
     createProduct(
       title: $title
@@ -29,6 +30,7 @@ const CreateProduct = gql`
       categoryPath: $categoryPath
       quantity: $quantity
       imageURLs: $imageURLs
+      price: $price
     ) {
       title
     }
@@ -46,6 +48,7 @@ class AddProductsBox extends Component {
       categoryPath: "",
       imageURLs: [],
       quantity: 0,
+      price: 0,
       showErrorMessage: false,
       showAddProductSuccessMessage: false
     };
@@ -59,8 +62,9 @@ class AddProductsBox extends Component {
       this.state.categoryId !== "" &&
       this.state.categoryName !== "" &&
       this.state.categoryPath !== "" &&
+      this.state.price > 0 &&
       this.state.imageURLs.length > 0 &&
-      this.state.quantity > 0
+      this.state.quantity > -2
     ) {
       this.setState({ showErrorMessage: false });
     } else {
@@ -73,6 +77,7 @@ class AddProductsBox extends Component {
     document.getElementById("detailsInput").value = "";
     document.getElementById("imageURLsInput").value = "";
     document.getElementById("quantityInput").value = "";
+    document.getElementById("priceInput").value = "";
     document.getElementById("categorySelect").selectedIndex = "0";
   }
 
@@ -82,6 +87,16 @@ class AddProductsBox extends Component {
         {
           showAddProductSuccessMessage: false,
           quantity: parseInt(e.target.value)
+        },
+        function() {
+          this.validateErrorMessage();
+        }
+      );
+    } else if (e.target.name === "price") {
+      this.setState(
+        {
+          showAddProductSuccessMessage: false,
+          price: parseFloat(e.target.value)
         },
         function() {
           this.validateErrorMessage();
@@ -139,7 +154,8 @@ class AddProductsBox extends Component {
       categoryName,
       categoryPath,
       imageURLs,
-      quantity
+      quantity,
+      price
     } = this.state;
 
     const res = await this.props.CreateProduct({
@@ -150,7 +166,8 @@ class AddProductsBox extends Component {
         categoryName: categoryName,
         categoryPath: categoryPath,
         quantity: quantity,
-        imageURLs: imageURLs
+        imageURLs: imageURLs,
+        price: price
       }
     });
     console.log(res);
@@ -241,6 +258,17 @@ class AddProductsBox extends Component {
               name="imageURLs"
               className="inventory-input-textarea"
               placeholder="Comma delimited: www.example.com,www.example2.com,www.example.com,www.example2.com"
+              onChange={this.onInputChange}
+            />
+          </div>
+          <div className="inventory-input-group">
+            <label>Price</label>
+            <input
+              id="priceInput"
+              type="text"
+              name="price"
+              className="inventory-input"
+              placeholder="Price"
               onChange={this.onInputChange}
             />
           </div>
