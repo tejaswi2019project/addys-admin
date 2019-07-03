@@ -274,6 +274,8 @@ class ManageProductsBox extends Component {
       document.getElementById(
         product.productId + "-imageURLsInput"
       ).value = product.imageURLs.join(",");
+      document.getElementById(product.productId + "-priceInput").value =
+        product.price;
       document.getElementById(product.productId + "-categorySelect").value =
         product.categoryId;
 
