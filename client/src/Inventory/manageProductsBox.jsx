@@ -288,6 +288,7 @@ class ManageProductsBox extends Component {
           categoryId: product.categoryId,
           categoryName: product.categoryName,
           categoryPath: product.categoryPath,
+          price: product.price,
           quantity: product.quantity
         },
         function() {
