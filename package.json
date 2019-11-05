@@ -21,7 +21,7 @@
   "homepage": "https://github.com/tejaswi2019project/addys-admin#readme",
   "dependencies": {
     "graphql-yoga": "^1.17.4",
-    "mongoose": "^5.5.15",
+    "mongoose": "^5.7.5",
     "uuid": "^3.3.2"
   }
 }
